@@ -1,0 +1,13 @@
+node_modules/
+dist_local/
+dist_dev/
+dist_preprod/
+dist_prod/
+.terraform/
+.terragrunt-cache/
+
+yarn-error.log
+.DS_Store
+.terraform.lock.hcl
+*.zip
+terraform.tfvars
