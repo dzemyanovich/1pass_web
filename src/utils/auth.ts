@@ -4,21 +4,19 @@ import { AUTH_TOKEN_VAR } from './global-vars';
 let tokenValidated = false;
 let tokenValidatedResult: boolean = null;
 
-export function signIn(username: string, password: string): Promise<boolean> {
+export function signIn(username: string, password: string): Promise<SignInResponse> {
   return new Promise((resolve) => {
     post<SignInRequest, SignInResponse>(`${process.env.ADMIN_API}/admin-sign-in`, {
       username,
       password,
     }).then((response: SignInResponse) => {
+      // todo: not sure this check should be here
       if (response.success) {
         localStorage.setItem(AUTH_TOKEN_VAR, response.data);
         tokenValidated = true;
         tokenValidatedResult = true;
-
-        resolve(true);
-      } else {
-        resolve(false);
       }
+      resolve(response);
     });
   });
 }
