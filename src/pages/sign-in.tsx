@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,28 +10,31 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { signIn } from '../utils/auth';
+import { requiredError } from '../utils/errors';
+import { isEmptyString } from '../utils/validation';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-// todo: add client validation
-// todo: add location for server validation errors
-// todo: add loading screen
 export default function SignIn() {
+  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [erorrs, setErrors] = useState([] as string[]);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  function formValid() {
+    return !isEmptyString(username) && !isEmptyString(password);
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setSubmitted(true);
     event.preventDefault();
-    if (loading) {
+    if (loading || !formValid()) {
       return;
     }
 
     setErrors([]);
-    const data = new FormData(event.currentTarget);
-    const username = data.get('username') as string;
-    const password = data.get('password') as string;
-
     setLoading(true);
     const response = await signIn(username, password);
     if (response.success) {
@@ -57,9 +60,10 @@ export default function SignIn() {
         >
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-              // todo: add client validation
-              // error
-              // helperText="Required field"
+              error={submitted && isEmptyString(username)}
+              helperText={submitted && isEmptyString(username) ? requiredError : ''}
+              onChange={event => setUsername(event.target.value)}
+              value={username}
               margin="normal"
               required
               fullWidth
@@ -71,6 +75,10 @@ export default function SignIn() {
               disabled={loading}
             />
             <TextField
+              error={submitted && isEmptyString(password)}
+              helperText={submitted && isEmptyString(password) ? requiredError : ''}
+              onChange={event => setPassword(event.target.value)}
+              value={password}
               margin="normal"
               required
               fullWidth
