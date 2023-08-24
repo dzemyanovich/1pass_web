@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { signIn } from '../utils/auth';
+import { signIn } from '../utils/api';
 import { requiredError } from '../utils/errors';
 import { isEmptyString } from '../utils/validation';
 

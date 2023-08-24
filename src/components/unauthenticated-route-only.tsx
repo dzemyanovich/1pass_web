@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { getBookings } from '../utils/auth';
+import { getBookings } from '../utils/api';
 
 type UnauthenticatedRouteOnly = {
   children: React.ReactNode,
@@ -11,19 +11,19 @@ type UnauthenticatedRouteOnly = {
 export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRouteOnly): JSX.Element {
   // todo: refactor naming
   const [isValidToken, initValidToken] = useState(null);
-  const [isLoading, initLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function validateTokenWrapper() {
       const isValidTokenValue = await getBookings();
       initValidToken(isValidTokenValue);
-      initLoading(false);
+      setLoading(false);
     }
 
     validateTokenWrapper();
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return null;
   }
 
