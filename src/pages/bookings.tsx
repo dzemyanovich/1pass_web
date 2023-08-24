@@ -12,14 +12,52 @@ import TableRow from '@mui/material/TableRow';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { AUTH_TOKEN_VAR } from '../utils/global-vars';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+
+function ButtonAppBar() {
+  function signOut() {
+    // todo: make proper sign out
+    localStorage.removeItem(AUTH_TOKEN_VAR);
+    // todo: use redux
+    sessionStorage.removeItem('bookings');
+    location.reload();
+  }
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            // TODO: add name of the sport object
+          </Typography>
+          <Button color="inherit" onClick={signOut}>Sign out</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+}
 
 // todo: add loading screen
 export default function Bookings() {
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ButtonAppBar />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Box
