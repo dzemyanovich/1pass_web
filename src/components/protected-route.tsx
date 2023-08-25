@@ -1,33 +1,40 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
 import { getBookings } from '../utils/api';
+import { SET_BOOKINGS } from '../redux/action-types';
 
 type ProtectedRoute = {
   children: React.ReactNode,
 };
 
 export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Element {
-  // todo: refactor naming
-  const [isValidToken, initValidToken] = useState(null);
+  const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function validateTokenWrapper() {
-      const isValidTokenValue = await getBookings();
-      initValidToken(isValidTokenValue);
-      setLoading(false);
-    }
+  const dispatch = useDispatch();
 
-    validateTokenWrapper();
+  useEffect(() => {
+    (async function () {
+      const response = await getBookings();
+      setAuthenticated(response.success);
+      if (response.success) {
+        dispatch({
+          type: SET_BOOKINGS,
+          payload: response.data,
+        });
+      }
+      setLoading(false);
+    })();
   }, []);
 
   if (loading) {
     return null;
   }
 
-  if (!isValidToken) {
+  if (!authenticated) {
     const to = window.location.pathname === '/'
       ? '/sign-in'
       : `/sign-in?returnUrl=${window.location.pathname}`;

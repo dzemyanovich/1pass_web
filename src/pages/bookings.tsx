@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -16,6 +17,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+
 import { AUTH_TOKEN_VAR } from '../utils/global-vars';
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -24,9 +26,8 @@ const defaultTheme = createTheme();
 function ButtonAppBar() {
   function signOut() {
     // todo: make proper sign out
+    // todo: create localStorage manager
     localStorage.removeItem(AUTH_TOKEN_VAR);
-    // todo: use redux
-    sessionStorage.removeItem('bookings');
     location.reload();
   }
 
@@ -88,8 +89,8 @@ export default function Bookings() {
 }
 
 function BookingsTable() {
-  // todo: use redux
-  const bookings: AdminBooking[] = JSON.parse(sessionStorage.bookings);
+  // todo: do not use any
+  const bookings: AdminBooking[] = useSelector((state: any) => state.bookings)
 
   return (
     <React.Fragment>

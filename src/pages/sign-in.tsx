@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { signIn } from '../utils/api';
 import { requiredError } from '../utils/errors';
 import { isEmptyString } from '../utils/validation';
+import { AUTH_TOKEN_VAR } from '../utils/global-vars';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();

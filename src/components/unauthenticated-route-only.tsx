@@ -9,25 +9,22 @@ type UnauthenticatedRouteOnly = {
 };
 
 export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRouteOnly): JSX.Element {
-  // todo: refactor naming
-  const [isValidToken, initValidToken] = useState(null);
+  const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function validateTokenWrapper() {
-      const isValidTokenValue = await getBookings();
-      initValidToken(isValidTokenValue);
+    (async function () {
+      const response = await getBookings();
+      setAuthenticated(response.success);
       setLoading(false);
-    }
-
-    validateTokenWrapper();
+    })();
   }, []);
 
   if (loading) {
     return null;
   }
 
-  if (isValidToken) {
+  if (authenticated) {
     return <Navigate to="/" replace />;
   }
 
