@@ -13,7 +13,7 @@ export async function signIn(username: string, password: string): Promise<SignIn
   return response;
 }
 
-export async function getBookings(): Promise<GetBookingsResponse> {
+export async function getAdminData(): Promise<GetBookingsResponse> {
   const token = localStorage.getItem(AUTH_TOKEN_VAR);
   if (!token) {
     return {
@@ -21,6 +21,7 @@ export async function getBookings(): Promise<GetBookingsResponse> {
     };
   }
 
+  // todo: change to get-admin-data
   return get(`${process.env.ADMIN_API}/get-bookings`, {
     token,
   });

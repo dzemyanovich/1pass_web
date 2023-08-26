@@ -31,6 +31,9 @@ function ButtonAppBar() {
     location.reload();
   }
 
+  // todo: do not use any
+  const adminData: AdminData = useSelector((state: any) => state.adminData);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -45,7 +48,7 @@ function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            // TODO: add name of the sport object
+            {adminData.sportObject.name} - {adminData.username}
           </Typography>
           <Button color="inherit" onClick={signOut}>Sign out</Button>
         </Toolbar>
@@ -90,7 +93,7 @@ export default function Bookings() {
 
 function BookingsTable() {
   // todo: do not use any
-  const bookings: AdminBooking[] = useSelector((state: any) => state.bookings)
+  const bookings: AdminBooking[] = useSelector((state: any) => state.adminData.bookings);
 
   return (
     <React.Fragment>

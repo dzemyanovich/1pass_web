@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
-import { getBookings } from '../utils/api';
-import { SET_BOOKINGS } from '../redux/action-types';
+import { getAdminData } from '../utils/api';
+import { SET_ADMIN_DATA } from '../redux/action-types';
 
 type ProtectedRoute = {
   children: React.ReactNode,
@@ -18,11 +18,11 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
 
   useEffect(() => {
     (async function () {
-      const response = await getBookings();
+      const response = await getAdminData();
       setAuthenticated(response.success);
       if (response.success) {
         dispatch({
-          type: SET_BOOKINGS,
+          type: SET_ADMIN_DATA,
           payload: response.data,
         });
       }

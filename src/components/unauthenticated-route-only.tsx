@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { getBookings } from '../utils/api';
+import { getAdminData } from '../utils/api';
 
 type UnauthenticatedRouteOnly = {
   children: React.ReactNode,
@@ -14,7 +14,7 @@ export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRo
 
   useEffect(() => {
     (async function () {
-      const response = await getBookings();
+      const response = await getAdminData();
       setAuthenticated(response.success);
       setLoading(false);
     })();

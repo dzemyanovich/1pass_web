@@ -6,11 +6,25 @@ type UserVM = {
   lastName: string,
 };
 
+type SportObjectVM = {
+  id: number,
+  name: string,
+  address: string,
+  lat: number,
+  long: number,
+};
+
 type AdminBooking = {
   id: number,
   user: UserVM,
   bookingTime: Date,
   visitTime: Date,
+};
+
+type AdminData = {
+  username: string,
+  sportObject: SportObjectVM,
+  bookings: AdminBooking[],
 };
 
 type RestResponse<T> = {
@@ -30,4 +44,4 @@ type GetBookingsRequest = {
   token: string,
 };
 
-type GetBookingsResponse = RestResponse<AdminBooking[]>;
+type GetBookingsResponse = RestResponse<AdminData>;

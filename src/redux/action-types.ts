@@ -1,1 +1,1 @@
-export const SET_BOOKINGS = 'SET_BOOKINGS';
+export const SET_ADMIN_DATA = 'SET_ADMIN_DATA';

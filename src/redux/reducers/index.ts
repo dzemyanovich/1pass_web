@@ -1,5 +1,5 @@
-import bookingsReducer from './bookings-reducer';
+import adminDataReducer from './admin-data-reducer';
 
 export default {
-  bookings: bookingsReducer,
+  adminData: adminDataReducer,
 };
