@@ -1,20 +1,20 @@
 import { get, post } from './rest';
-import { AUTH_TOKEN_VAR } from './global-vars';
+import { getAuthToken, setAuthToken } from './local-storage-manager';
 
-// todo: use async
 export async function signIn(username: string, password: string): Promise<SignInResponse> {
+  // todo: SignInResponse includes bookings and other admin data
   const response: SignInResponse = await post(`${process.env.ADMIN_API}/admin-sign-in`, {
     username,
     password,
   });
   if (response.success) {
-    localStorage.setItem(AUTH_TOKEN_VAR, response.data);
+    setAuthToken(response.data);
   }
   return response;
 }
 
 export async function getAdminData(): Promise<GetBookingsResponse> {
-  const token = localStorage.getItem(AUTH_TOKEN_VAR);
+  const token = getAuthToken();
   if (!token) {
     return {
       success: false,

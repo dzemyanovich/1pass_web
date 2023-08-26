@@ -13,17 +13,15 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { AUTH_TOKEN_VAR } from '../utils/global-vars';
 import Loading from '../components/loading';
+import { removeAuthToken } from '../utils/local-storage-manager';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 function ButtonAppBar() {
   function signOut() {
-    // todo: make proper sign out
-    // todo: create localStorage manager
-    localStorage.removeItem(AUTH_TOKEN_VAR);
+    removeAuthToken();
     location.reload();
   }
 
@@ -53,7 +51,6 @@ function ButtonAppBar() {
   );
 }
 
-// todo: add loading screen
 export default function BookingsWrapper({ children }) {
   const loading: boolean = useSelector((state: any) => state.loading);
   if (loading) {
@@ -61,9 +58,11 @@ export default function BookingsWrapper({ children }) {
   }
 
   return (
+    // todo: do we need ThemeProvider?
     <ThemeProvider theme={defaultTheme}>
       <ButtonAppBar />
       <Box sx={{ display: 'flex' }}>
+        {/* todo: do we need CssBaseline */}
         <CssBaseline />
         <Box
           component="main"
