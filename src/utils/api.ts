@@ -8,7 +8,7 @@ export async function signIn(username: string, password: string): Promise<SignIn
     password,
   });
   if (response.success) {
-    setAuthToken(response.data);
+    setAuthToken(response.data.token);
   }
   return response;
 }

@@ -1,6 +1,6 @@
 import { SET_ADMIN_DATA } from '../action-types';
 
-const initialState = [];
+const initialState = null;
 
 // todo: add types
 export default function (state = initialState, action) {

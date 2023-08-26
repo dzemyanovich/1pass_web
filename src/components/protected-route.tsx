@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { getAdminData } from '../utils/api';
@@ -13,18 +13,22 @@ type ProtectedRoute = {
 export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Element {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-
   const dispatch = useDispatch();
+  const adminData: AdminData = useSelector((state: any) => state.adminData);
 
   useEffect(() => {
     (async function () {
-      const response = await getAdminData();
-      setAuthenticated(response.success);
-      if (response.success) {
-        dispatch({
-          type: SET_ADMIN_DATA,
-          payload: response.data,
-        });
+      if (adminData) {
+        setAuthenticated(true);
+      } else {
+        const response = await getAdminData();
+        setAuthenticated(response.success);
+        if (response.success) {
+          dispatch({
+            type: SET_ADMIN_DATA,
+            payload: response.data,
+          });
+        }
       }
       setLoading(false);
       dispatch({
@@ -47,3 +51,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
 
   return children as JSX.Element;
 }
+function useSelector(arg0: (state: any) => any): AdminData {
+  throw new Error('Function not implemented.');
+}
+

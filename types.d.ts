@@ -27,7 +27,11 @@ type AdminData = {
   bookings: AdminBooking[],
 };
 
-type RestResponse<T> = {
+type AdminSignInResult = AdminData & {
+  token: string,
+};
+
+type EventResult<T> = {
   success: boolean,
   errors?: string[],
   data?: T,
@@ -38,10 +42,10 @@ type SignInRequest = {
   password: string,
 };
 
-type SignInResponse = RestResponse<string>;
+type SignInResponse = EventResult<AdminSignInResult>;
 
 type GetBookingsRequest = {
   token: string,
 };
 
-type GetBookingsResponse = RestResponse<AdminData>;
+type GetBookingsResponse = EventResult<AdminData>;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { signIn } from '../utils/api';
 import { requiredError } from '../utils/errors';
 import { isEmptyString } from '../utils/validation';
+import { SET_ADMIN_DATA } from '../redux/action-types';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -22,6 +24,7 @@ export default function SignIn() {
   const [erorrs, setErrors] = useState([] as string[]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   function formValid() {
     return !isEmptyString(username) && !isEmptyString(password);
@@ -36,8 +39,17 @@ export default function SignIn() {
 
     setErrors([]);
     setLoading(true);
+    // todo: change response to { token, adminData }
     const response = await signIn(username, password);
     if (response.success) {
+      dispatch({
+        type: SET_ADMIN_DATA,
+        payload: {
+          username: response.data.username,
+          sportObject: response.data.sportObject,
+          bookings: response.data.bookings,
+        },
+      });
       window.location.href = getUrlParam('returnUrl') || '/';
     } else {
       setErrors(response.errors);
