@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { AUTH_TOKEN_VAR } from '../utils/global-vars';
+import Loading from '../components/loading';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -54,6 +55,11 @@ function ButtonAppBar() {
 
 // todo: add loading screen
 export default function BookingsWrapper({ children }) {
+  const loading: boolean = useSelector((state: any) => state.loading);
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <ButtonAppBar />

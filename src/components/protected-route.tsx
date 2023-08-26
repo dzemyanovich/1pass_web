@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
 import { getAdminData } from '../utils/api';
-import { SET_ADMIN_DATA } from '../redux/action-types';
+import { SET_ADMIN_DATA, SET_LOADING } from '../redux/action-types';
 
 type ProtectedRoute = {
   children: React.ReactNode,
@@ -27,6 +27,10 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
         });
       }
       setLoading(false);
+      dispatch({
+        type: SET_LOADING,
+        payload: false,
+      });
     })();
   }, []);
 
