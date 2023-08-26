@@ -9,10 +9,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import SignIn from './pages/sign-in';
-import Bookings from './pages/bookings';
+import TodayBookings from './pages/today-bookings';
 import UnauthenticatedRouteOnly from './components/unauthenticated-route-only';
 import ProtectedRoute from './components/protected-route';
 import store from './redux/store'
+import BookingsWrapper from './pages/bookings-wrapper';
+import PastBookings from './pages/past-bookings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,7 +27,9 @@ root.render(
             index
             element={(
               <ProtectedRoute>
-                <Bookings />
+                <BookingsWrapper>
+                  <TodayBookings />
+                </BookingsWrapper>
               </ProtectedRoute>
             )}
           />
@@ -33,7 +37,19 @@ root.render(
             path="*"
             element={(
               <ProtectedRoute>
-                <Bookings />
+                <BookingsWrapper>
+                  <TodayBookings />
+                </BookingsWrapper>
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/past-bookings"
+            element={(
+              <ProtectedRoute>
+                <BookingsWrapper>
+                  <PastBookings />
+                </BookingsWrapper>
               </ProtectedRoute>
             )}
           />
