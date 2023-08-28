@@ -33,6 +33,11 @@ export default function PastBookings() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {bookings.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={6}>No bookings found</TableCell>
+            </TableRow>
+          )}
           {bookings.map((booking: AdminBooking) => (
             <TableRow key={booking.id}>
               <TableCell>{booking.user.firstName}</TableCell>

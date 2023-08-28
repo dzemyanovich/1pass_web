@@ -10,6 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import { formatDate } from '../utils/format';
 import { isToday } from '../utils/utils';
 
+// todo: chrome -> console -> Selector unknown returned a different result when called with the same parameters.
+// This can lead to unnecessary rerenders.
+// todo: the same error for past-bookings
 export default function TodayBookings() {
   // todo: do not use any
   const bookings: AdminBooking[] = useSelector((state: any) => state
@@ -35,6 +38,11 @@ export default function TodayBookings() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {bookings.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={7}>No bookings found</TableCell>
+            </TableRow>
+          )}
           {bookings.map((booking: AdminBooking) => (
             <TableRow key={booking.id}>
               <TableCell>{booking.user.firstName}</TableCell>
