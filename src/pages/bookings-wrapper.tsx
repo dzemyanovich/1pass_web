@@ -1,49 +1,17 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 
 import Loading from '../components/loading';
-import UserMenu from '../components/user-menu';
+import BottomBar from '../components/bottom-bar';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-
-function ButtonAppBar() {
-  // todo: do not use any
-  const { sportObject }: AdminData = useSelector((state: any) => state.adminData);
-
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {sportObject.name}
-          </Typography>
-          <UserMenu />
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-}
 
 export default function BookingsWrapper({ children }) {
   const loading: boolean = useSelector((state: any) => state.loading);
@@ -54,7 +22,7 @@ export default function BookingsWrapper({ children }) {
   return (
     // todo: do we need ThemeProvider?
     <ThemeProvider theme={defaultTheme}>
-      <ButtonAppBar />
+      <BottomBar />
       <Box sx={{ display: 'flex' }}>
         {/* todo: do we need CssBaseline */}
         <CssBaseline />
