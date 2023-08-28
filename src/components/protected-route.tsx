@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -51,7 +52,3 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
 
   return children as JSX.Element;
 }
-function useSelector(arg0: (state: any) => any): AdminData {
-  throw new Error('Function not implemented.');
-}
-

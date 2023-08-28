@@ -39,16 +39,11 @@ export default function SignIn() {
 
     setErrors([]);
     setLoading(true);
-    // todo: change response to { token, adminData }
     const response = await signIn(username, password);
     if (response.success) {
       dispatch({
         type: SET_ADMIN_DATA,
-        payload: {
-          username: response.data.username,
-          sportObject: response.data.sportObject,
-          bookings: response.data.bookings,
-        },
+        payload: response.data.adminData,
       });
       window.location.href = getUrlParam('returnUrl') || '/';
     } else {

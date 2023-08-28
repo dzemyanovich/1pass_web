@@ -1,3 +1,29 @@
+// ************** API ****************
+
+type LambdaResponse<T> = {
+  success: boolean,
+  errors?: string[],
+  data?: T,
+};
+
+type SignInRequest = {
+  username: string,
+  password: string,
+};
+
+type AdminSignInResponse = LambdaResponse<{
+  token: string,
+  adminData: AdminData,
+}>;
+
+type TokenRequest = {
+  token: string,
+};
+
+type AdminDataResponse = LambdaResponse<AdminData>;
+
+// ************** DB ****************
+
 type UserVM = {
   id: string,
   phone: string,
@@ -17,8 +43,8 @@ type SportObjectVM = {
 type AdminBooking = {
   id: number,
   user: UserVM,
-  bookingTime: Date,
-  visitTime: Date,
+  bookingTime: string,
+  visitTime: string,
 };
 
 type AdminData = {
@@ -26,26 +52,3 @@ type AdminData = {
   sportObject: SportObjectVM,
   bookings: AdminBooking[],
 };
-
-type AdminSignInResult = AdminData & {
-  token: string,
-};
-
-type EventResult<T> = {
-  success: boolean,
-  errors?: string[],
-  data?: T,
-};
-
-type SignInRequest = {
-  username: string,
-  password: string,
-};
-
-type SignInResponse = EventResult<AdminSignInResult>;
-
-type GetBookingsRequest = {
-  token: string,
-};
-
-type GetBookingsResponse = EventResult<AdminData>;

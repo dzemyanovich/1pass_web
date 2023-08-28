@@ -1,6 +1,6 @@
-export function formatDate(date: Date): string | null {
+export function formatDate(date: string): string | null {
   if (!date) {
     return null;
   }
-  return new Date(date.toString()).toLocaleString();
+  return new Date(date).toLocaleString();
 }

@@ -1,5 +1,5 @@
-export function isToday(date: Date): boolean {
+export function isToday(date: string): boolean {
   const todaysDate = new Date();
 
-  return date.setHours(0, 0, 0, 0) === todaysDate.setHours(0, 0, 0, 0);
+  return new Date(date).setHours(0, 0, 0, 0) === todaysDate.setHours(0, 0, 0, 0);
 }
