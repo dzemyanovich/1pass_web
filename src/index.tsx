@@ -18,6 +18,7 @@ import PastBookings from './pages/past-bookings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// todo: use linting
 root.render(
   <Provider store={store}>
     <BrowserRouter>

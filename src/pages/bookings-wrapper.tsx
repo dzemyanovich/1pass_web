@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -14,19 +13,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import Loading from '../components/loading';
-import { removeAuthToken } from '../utils/local-storage-manager';
+import UserMenu from '../components/user-menu';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 function ButtonAppBar() {
-  function signOut() {
-    removeAuthToken();
-    location.reload();
-  }
-
   // todo: do not use any
-  const adminData: AdminData = useSelector((state: any) => state.adminData);
+  const { sportObject }: AdminData = useSelector((state: any) => state.adminData);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -42,9 +36,9 @@ function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {adminData.sportObject.name} - {adminData.username}
+            {sportObject.name}
           </Typography>
-          <Button color="inherit" onClick={signOut}>Sign out</Button>
+          <UserMenu />
         </Toolbar>
       </AppBar>
     </Box>
