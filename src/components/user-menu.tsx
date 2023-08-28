@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -7,9 +8,10 @@ import Menu from '@mui/material/Menu';
 import { removeAuthToken } from '../utils/local-storage-manager';
 import { Button } from '@mui/material';
 
-export default function MenuAppBar() {
+export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { username }: AdminData = useSelector((state: any) => state.adminData);
+  const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +28,8 @@ export default function MenuAppBar() {
 
   return (
     <div>
+      <Button color="inherit" onClick={() => navigate('/')}>Today Bookings</Button>
+      <Button color="inherit" onClick={() => navigate('/past-bookings')}>Past Bookings</Button>
       <Button color="inherit" onClick={handleMenu}>
         <IconButton
           size="large"

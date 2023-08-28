@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 import Loading from '../components/loading';
-import BottomBar from '../components/bottom-bar';
+import TopBar from '../components/top-bar';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -22,7 +22,7 @@ export default function BookingsWrapper({ children }) {
   return (
     // todo: do we need ThemeProvider?
     <ThemeProvider theme={defaultTheme}>
-      <BottomBar />
+      <TopBar />
       <Box sx={{ display: 'flex' }}>
         {/* todo: do we need CssBaseline */}
         <CssBaseline />
