@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { username }: AdminData = useSelector((state: any) => state.adminData);
+  const { username }: AdminData = useSelector((state: ReduxState) => state.adminData);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

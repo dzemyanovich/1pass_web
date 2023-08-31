@@ -76,7 +76,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft({ children }) {
-  const loading: boolean = useSelector((state: any) => state.loading);
+  const loading: boolean = useSelector((state: ReduxState) => state.loading);
   if (loading) {
     return <Loading />
   }
@@ -84,7 +84,7 @@ export default function PersistentDrawerLeft({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { sportObject }: AdminData = useSelector((state: any) => state.adminData);
+  const { sportObject }: AdminData = useSelector((state: ReduxState) => state.adminData);
 
   const handleDrawerOpen = () => {
     setOpen(true);

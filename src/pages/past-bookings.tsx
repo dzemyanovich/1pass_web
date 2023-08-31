@@ -10,8 +10,7 @@ import { formatDate } from '../utils/format';
 import { isToday } from '../utils/utils';
 
 export default function PastBookings() {
-  // todo: do not use any
-  const bookings: AdminBooking[] = useSelector((state: any) => state
+  const bookings: AdminBooking[] = useSelector((state: ReduxState) => state
     .adminData
     .bookings
     .filter((booking: AdminBooking) => !isToday(booking.bookingTime)));

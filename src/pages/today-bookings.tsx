@@ -14,8 +14,7 @@ import { isToday } from '../utils/utils';
 // This can lead to unnecessary rerenders.
 // todo: the same error for past-bookings
 export default function TodayBookings() {
-  // todo: do not use any
-  const bookings: AdminBooking[] = useSelector((state: any) => state
+  const bookings: AdminBooking[] = useSelector((state: ReduxState) => state
     .adminData
     .bookings
     .filter((booking: AdminBooking) => isToday(booking.bookingTime)));

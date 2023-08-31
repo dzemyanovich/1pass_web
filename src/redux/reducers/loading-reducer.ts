@@ -1,9 +1,10 @@
+import { PayloadAction } from '@reduxjs/toolkit'
+
 import { SET_LOADING } from '../action-types';
 
 const initialState = true;
 
-// todo: add types
-export default function (state = initialState, action) {
+export default function (state = initialState, action: PayloadAction<boolean>): boolean {
   switch (action.type) {
     case SET_LOADING: {
       return action.payload;

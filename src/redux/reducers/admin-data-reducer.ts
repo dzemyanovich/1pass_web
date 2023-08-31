@@ -1,9 +1,10 @@
+import { PayloadAction } from '@reduxjs/toolkit'
+
 import { SET_ADMIN_DATA } from '../action-types';
 
 const initialState = null;
 
-// todo: add types
-export default function (state = initialState, action) {
+export default function (state = initialState, action: PayloadAction<AdminData>): AdminData {
   switch (action.type) {
     case SET_ADMIN_DATA: {
       return action.payload;
