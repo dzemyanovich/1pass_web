@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { styled, useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -19,6 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HistoryIcon from '@mui/icons-material/History';
 import TodayIcon from '@mui/icons-material/Today';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { styled, useTheme } from '@mui/material/styles';
 
 import UserMenu from '../components/user-menu';
 import Loading from '../components/loading';

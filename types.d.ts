@@ -22,6 +22,8 @@ type TokenRequest = {
 
 type AdminDataResponse = LambdaResponse<AdminData>;
 
+type ConfirmVisitResponse = LambdaResponse<string>;
+
 // ************** DB ****************
 
 type UserVM = {

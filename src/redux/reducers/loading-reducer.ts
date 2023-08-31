@@ -4,7 +4,7 @@ import { SET_LOADING } from '../action-types';
 
 const initialState = true;
 
-export default function (state = initialState, action: PayloadAction<boolean>): boolean {
+export default function (state: boolean = initialState, action: PayloadAction<boolean>): boolean {
   switch (action.type) {
     case SET_LOADING: {
       return action.payload;

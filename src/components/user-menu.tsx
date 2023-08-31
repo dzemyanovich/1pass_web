@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux'
+
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+
 import { removeAuthToken } from '../utils/local-storage-manager';
-import { Button } from '@mui/material';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

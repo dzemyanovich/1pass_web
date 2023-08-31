@@ -26,3 +26,12 @@ export async function getAdminData(): Promise<AdminDataResponse> {
     token,
   });
 }
+
+export async function confirmVisit(bookingId: number): Promise<ConfirmVisitResponse> {
+  const token = getAuthToken();
+
+  return post(`${process.env.ADMIN_API}/confirm-visit`, {
+    token,
+    bookingId,
+  });
+}
