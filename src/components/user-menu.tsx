@@ -26,6 +26,7 @@ export default function UserMenu() {
 
   return (
     <div>
+      {/* todo: chrome -> console -> <button> cannot appear as a descendant of <button> */}
       <Button color="inherit" onClick={handleMenu}>
         <IconButton
           size="large"
