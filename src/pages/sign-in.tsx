@@ -7,8 +7,8 @@ import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import CircularProgress from '@mui/material/CircularProgress';
 
+import LoadingButton from '../components/loading-button';
 import { signIn } from '../utils/api';
 import { requiredError } from '../utils/errors';
 import { isEmptyString } from '../utils/validation';
@@ -90,7 +90,7 @@ export default function SignIn() {
             autoComplete="current-password"
             disabled={loading}
           />
-          <Box sx={{ position: 'relative' }}>
+          <LoadingButton loading={loading}>
             <Button
               type="submit"
               fullWidth
@@ -100,19 +100,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            {loading && (
-              <CircularProgress
-                size={24}
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: '-12px',
-                  marginLeft: '-12px',
-                }}
-              />
-            )}
-          </Box>
+          </LoadingButton>
           {!!erorrs.length && (
             <Alert severity="error">
               {erorrs.map((error: string, index: number) => <div key={`server-error-${index}`}>{error}</div>)}

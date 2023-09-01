@@ -19,6 +19,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { TransitionProps } from '@mui/material/transitions';
 
+import LoadingButton from '../components/loading-button';
 import { formatDate } from '../utils/format';
 import { isToday } from '../utils/utils';
 import { confirmVisit } from '../utils/api';
@@ -41,6 +42,7 @@ export default function TodayBookings() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [booking, setBooking] = useState(null as AdminBooking);
   const [errors, setErrors] = useState([] as string[]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const bookings: AdminBooking[] = useSelector((state: ReduxState) => state
@@ -54,15 +56,24 @@ export default function TodayBookings() {
   };
 
   const closeDialog = () => {
-    setDiagloOpen(false);
+    if (!loading) {
+      setDiagloOpen(false);
+    }
   };
 
   const closeSnackbar = () => {
     setSnackbarOpen(false);
   };
 
-  const confirmVisitRequest = async () => {
+  const confirmVisitRequest = async (event): Promise<void> => {
+    event.preventDefault();
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
     const response = await confirmVisit(booking.id);
+    setLoading(false);
     if (response.success) {
       setErrors([]);
       dispatch({
@@ -114,10 +125,12 @@ export default function TodayBookings() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeDialog}>Cancel</Button>
-          <Button variant="contained" onClick={confirmVisitRequest}>Confirm</Button>
+          <Button onClick={closeDialog} disabled={loading}>Cancel</Button>
+          <LoadingButton loading={loading}>
+            <Button variant="contained" onClick={confirmVisitRequest} disabled={loading}>Confirm</Button>
+          </LoadingButton>
         </DialogActions>
-      </Dialog>
+      </Dialog >
     );
   }
 
