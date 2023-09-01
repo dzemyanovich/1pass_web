@@ -59,3 +59,8 @@ type ReduxState = {
   adminData: AdminData,
   loading: boolean,
 };
+
+type VisitTimePaylod = {
+  visitTime: string,
+  booking: AdminBooking,
+};

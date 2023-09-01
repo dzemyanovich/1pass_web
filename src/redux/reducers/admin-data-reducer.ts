@@ -4,16 +4,16 @@ import { SET_ADMIN_DATA, SET_VISIT_TIME } from '../action-types';
 
 const initialState = null;
 
-// todo: add type to state
-// todo: do not use any
-export default function (state: AdminData = initialState, action: PayloadAction<any>): AdminData {
+export default function (
+  state: AdminData = initialState,
+  action: PayloadAction<AdminData | VisitTimePaylod>
+): AdminData {
   switch (action.type) {
     case SET_ADMIN_DATA: {
-      return action.payload;
+      return action.payload as AdminData;
     }
-    // todo: consider separate reducer
     case SET_VISIT_TIME: {
-      const { visitTime, booking }: { visitTime: string, booking: AdminBooking } = action.payload;
+      const { visitTime, booking } = action.payload as VisitTimePaylod;
       const bookings = state.bookings.map((item: AdminBooking) => {
         return item.id === booking.id
           ? {

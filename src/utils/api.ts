@@ -30,7 +30,7 @@ export async function getAdminData(): Promise<AdminDataResponse> {
 export async function confirmVisit(bookingId: number): Promise<ConfirmVisitResponse> {
   const token = getAuthToken();
 
-  // todo: delete that
+  // use this code for testing
   // const delay = ms => new Promise(res => setTimeout(res, ms));
   // await delay(2000);
   // return {
