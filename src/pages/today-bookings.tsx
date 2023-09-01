@@ -9,30 +9,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Dialog from '@mui/material/Dialog';
-import Slide from '@mui/material/Slide';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { TransitionProps } from '@mui/material/transitions';
 
-import LoadingButton from '../components/loading-button';
 import { formatDate } from '../utils/format';
 import { isToday } from '../utils/utils';
 import { confirmVisit } from '../utils/api';
 import { SET_VISIT_TIME } from '../redux/action-types';
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import ConfirmVisitDialog from '../components/confirm-visit-dialog';
 
 // todo: chrome -> console -> Selector unknown returned a different result when called with the same parameters.
 // This can lead to unnecessary rerenders.
@@ -92,7 +76,7 @@ export default function TodayBookings() {
 
   const Toast = () => {
     return (
-      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={closeSnackbar}>
+      <Snackbar open={snackbarOpen} autoHideDuration={2000} onClose={closeSnackbar}>
         <Alert onClose={closeSnackbar} severity={errors.length ? 'error' : 'success'} sx={{ width: '100%' }}>
           {errors.length ? (
             errors.map((error: string) => <div>{error}</div>)
@@ -101,36 +85,6 @@ export default function TodayBookings() {
           )}
         </Alert>
       </Snackbar>
-    );
-  }
-
-  const ConfirmDialog = () => {
-    return (
-      <Dialog
-        open={dialogOpen}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={closeDialog}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{'Confirm Visit'}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {booking && (
-              <span>
-                Do you wish to confirm visit of <strong>{booking.user.firstName} {booking.user.lastName}</strong>,
-                phone <strong>{booking.user.phone}</strong>?
-              </span>
-            )}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDialog} disabled={loading}>Cancel</Button>
-          <LoadingButton loading={loading}>
-            <Button variant="contained" onClick={confirmVisitRequest} disabled={loading}>Confirm</Button>
-          </LoadingButton>
-        </DialogActions>
-      </Dialog >
     );
   }
 
@@ -180,7 +134,13 @@ export default function TodayBookings() {
           ))}
         </TableBody>
       </Table>
-      <ConfirmDialog />
+      <ConfirmVisitDialog
+        loading={loading}
+        dialogOpen={dialogOpen}
+        closeDialog={closeDialog}
+        booking={booking}
+        confirmVisitRequest={confirmVisitRequest}
+      />
       <Toast />
     </React.Fragment>
   );
