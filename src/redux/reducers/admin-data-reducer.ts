@@ -23,10 +23,9 @@ export default function (state: AdminData = initialState, action: PayloadAction<
           : item;
       });
 
-      // todo: UI update does not happen
       return {
         ...state,
-        ...bookings,
+        bookings,
       };
     }
     default:
