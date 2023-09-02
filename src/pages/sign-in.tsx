@@ -48,7 +48,6 @@ export default function SignIn() {
     }
   };
 
-  // todo: go to browser -> TypeError: Cannot read properties of undefined (reading 'icons')
   return (
     <Container component="main" maxWidth="xs">
       <Box
