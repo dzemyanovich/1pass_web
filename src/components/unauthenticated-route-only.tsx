@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { getAdminData } from '../utils/api';
+import SplashScreen from './splash-screen';
 
 type UnauthenticatedRouteOnly = {
   children: React.ReactNode,
@@ -21,7 +22,7 @@ export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRo
   }, []);
 
   if (loading) {
-    return null;
+    return <SplashScreen />
   }
 
   if (authenticated) {

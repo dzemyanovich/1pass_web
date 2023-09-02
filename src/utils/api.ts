@@ -30,14 +30,6 @@ export async function getAdminData(): Promise<AdminDataResponse> {
 export async function confirmVisit(bookingId: number): Promise<ConfirmVisitResponse> {
   const token = getAuthToken();
 
-  // use this code for testing
-  // const delay = ms => new Promise(res => setTimeout(res, ms));
-  // await delay(2000);
-  // return {
-  //   success: true,
-  //   data: new Date().toString(),
-  // };
-
   return post(`${process.env.ADMIN_API}/confirm-visit`, {
     token,
     bookingId,

@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 import { getAdminData } from '../utils/api';
 import { SET_ADMIN_DATA, SET_LOADING } from '../redux/action-types';
+import SplashScreen from './splash-screen';
 
 type ProtectedRoute = {
   children: React.ReactNode,
@@ -23,6 +24,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
         setAuthenticated(true);
       } else {
         const response = await getAdminData();
+
         setAuthenticated(response.success);
         if (response.success) {
           dispatch({
@@ -40,7 +42,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
   }, []);
 
   if (loading) {
-    return null;
+    return <SplashScreen />;
   }
 
   if (!authenticated) {

@@ -22,7 +22,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled, useTheme } from '@mui/material/styles';
 
 import UserMenu from '../components/user-menu';
-import Loading from '../components/loading';
 
 const drawerWidth = 240;
 
@@ -76,11 +75,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft({ children }) {
-  const loading: boolean = useSelector((state: ReduxState) => state.loading);
-  if (loading) {
-    return <Loading />
-  }
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
