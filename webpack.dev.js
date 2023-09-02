@@ -16,7 +16,7 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.AUTH_API': JSON.stringify('https://vx84t2rr44.execute-api.eu-central-1.amazonaws.com/dev1'),
+      'process.env.ADMIN_API': JSON.stringify('https://vx84t2rr44.execute-api.eu-central-1.amazonaws.com/dev1'),
     }),
   ],
 });
