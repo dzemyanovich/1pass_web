@@ -8,6 +8,8 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 
 import { removeAuthToken } from '../utils/local-storage-manager';
+import Icon from '@mui/material/Icon';
+import Box from '@mui/material/Box';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,18 +30,11 @@ export default function UserMenu() {
 
   return (
     <div>
-      {/* todo: chrome -> console -> <button> cannot appear as a descendant of <button> */}
-      <Button color="inherit" onClick={handleMenu}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        {username}
+      <Button color="inherit" size="large" onClick={handleMenu}>
+        <Box sx={{ m: 1, display: 'flex' }}>
+          <AccountCircle  sx={{ mr: 1 }}/>
+          {username}
+        </Box>
       </Button>
       <Menu
         id="menu-appbar"

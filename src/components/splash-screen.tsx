@@ -26,8 +26,8 @@ export default function SplashScreen() {
       </Box>
       <Table size="medium" sx={{ mt: 2 }}>
         <TableBody>
-          {[...Array(6)].map((index: number) => (
-            <TableRow key={index}>
+          {[...Array(6)].map((value: number, index: number) => (
+            <TableRow key={`${value}${index}`}>
               <TableCell><Skeleton /></TableCell>
               <TableCell><Skeleton /></TableCell>
               <TableCell><Skeleton /></TableCell>
