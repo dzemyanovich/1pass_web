@@ -11,16 +11,22 @@ import { TransitionProps } from '@mui/material/transitions/transition';
 
 import LoadingButton from './loading-button';
 
-const Transition = React.forwardRef(function Transition(
+const Transition = React.forwardRef((
   props: TransitionProps & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     children: React.ReactElement<any, any>;
   },
   ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+  // eslint-disable-next-line react/jsx-props-no-spreading
+) => (<Slide direction="up" ref={ref} {...props} />));
 
-function ConfirmVisitDialog({ loading, dialogOpen, closeDialog, booking, confirmVisitRequest }) {
+function ConfirmVisitDialog({
+  loading,
+  dialogOpen,
+  closeDialog,
+  booking,
+  confirmVisitRequest,
+}: ConfirmVisitDialogProps) {
   return (
     <Dialog
       open={dialogOpen}
@@ -29,7 +35,7 @@ function ConfirmVisitDialog({ loading, dialogOpen, closeDialog, booking, confirm
       onClose={closeDialog}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>{'Confirm Visit'}</DialogTitle>
+      <DialogTitle>Confirm Visit</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           {booking && (
@@ -46,8 +52,8 @@ function ConfirmVisitDialog({ loading, dialogOpen, closeDialog, booking, confirm
           <Button variant="contained" onClick={confirmVisitRequest} disabled={loading}>Confirm</Button>
         </LoadingButton>
       </DialogActions>
-    </Dialog >
-  )
+    </Dialog>
+  );
 }
 
 export default React.memo(ConfirmVisitDialog);

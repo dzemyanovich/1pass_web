@@ -9,10 +9,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 
 import ConfirmVisitDialog from '../components/confirm-visit-dialog';
+import Toast from '../components/toast';
 import { formatDate } from '../utils/format';
 import { confirmVisit } from '../utils/api';
 import { SET_VISIT_TIME } from '../redux/action-types';
@@ -26,8 +25,8 @@ export default function TodayBookings() {
   const dispatch = useDispatch();
   const bookings: AdminBooking[] = useSelector((state: ReduxState) => state.adminData.todayBookings);
 
-  const openDialog = (booking: AdminBooking) => {
-    setBooking(booking);
+  const openDialog = (adminBooking: AdminBooking) => {
+    setBooking(adminBooking);
     setDiagloOpen(true);
   };
 
@@ -41,7 +40,7 @@ export default function TodayBookings() {
     setSnackbarOpen(false);
   };
 
-  const confirmVisitRequest = async (event): Promise<void> => {
+  const confirmVisitRequest = async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
     event.preventDefault();
     if (loading) {
       return;
@@ -66,22 +65,8 @@ export default function TodayBookings() {
     setSnackbarOpen(true);
   };
 
-  const Toast = () => {
-    return (
-      <Snackbar open={snackbarOpen} autoHideDuration={2000} onClose={closeSnackbar}>
-        <Alert onClose={closeSnackbar} severity={errors.length ? 'error' : 'success'} sx={{ width: '100%' }}>
-          {errors.length ? (
-            errors.map((error: string) => <div>{error}</div>)
-          ) : (
-            'Booking updated'
-          )}
-        </Alert>
-      </Snackbar>
-    );
-  }
-
   return (
-    <React.Fragment>
+    <>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Today Bookings
       </Typography>
@@ -103,20 +88,20 @@ export default function TodayBookings() {
               <TableCell colSpan={7}>No bookings found</TableCell>
             </TableRow>
           )}
-          {bookings.map((booking: AdminBooking) => (
-            <TableRow key={booking.id}>
-              <TableCell>{booking.user.firstName}</TableCell>
-              <TableCell>{booking.user.lastName}</TableCell>
-              <TableCell>{booking.user.phone}</TableCell>
-              <TableCell>{booking.user.email}</TableCell>
-              <TableCell>{formatDate(booking.bookingTime)}</TableCell>
-              <TableCell>{formatDate(booking.visitTime)}</TableCell>
+          {bookings.map((adminBooking: AdminBooking) => (
+            <TableRow key={adminBooking.id}>
+              <TableCell>{adminBooking.user.firstName}</TableCell>
+              <TableCell>{adminBooking.user.lastName}</TableCell>
+              <TableCell>{adminBooking.user.phone}</TableCell>
+              <TableCell>{adminBooking.user.email}</TableCell>
+              <TableCell>{formatDate(adminBooking.bookingTime)}</TableCell>
+              <TableCell>{formatDate(adminBooking.visitTime)}</TableCell>
               <TableCell>
-                {!booking.visitTime && (
+                {!adminBooking.visitTime && (
                   <Button
                     type="submit"
                     variant="text"
-                    onClick={() => openDialog(booking)}
+                    onClick={() => openDialog(adminBooking)}
                   >
                     Confirm visit
                   </Button>
@@ -133,7 +118,7 @@ export default function TodayBookings() {
         booking={booking}
         confirmVisitRequest={confirmVisitRequest}
       />
-      <Toast />
-    </React.Fragment>
+      <Toast snackbarOpen={snackbarOpen} closeSnackbar={closeSnackbar} errors={errors} />
+    </>
   );
 }

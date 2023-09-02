@@ -5,4 +5,5 @@ export function isToday(date: string): boolean {
 }
 
 // e.g. await delay(3000);
+// eslint-disable-next-line no-promise-executor-return
 export const delay = (ms: number) => new Promise(res => setTimeout(res, ms));

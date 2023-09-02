@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { getAdminData } from '../utils/api';
@@ -19,7 +18,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
   const adminData: AdminDataVM = useSelector((state: ReduxState) => state.adminData);
 
   useEffect(() => {
-    (async function () {
+    (async () => {
       if (adminData) {
         setAuthenticated(true);
       } else {
@@ -39,7 +38,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
         payload: false,
       });
     })();
-  }, []);
+  }, [adminData, dispatch]);
 
   if (loading) {
     return <SplashScreen />;

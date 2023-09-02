@@ -1,14 +1,14 @@
-import { PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction } from '@reduxjs/toolkit';
 
 import { SET_ADMIN_DATA, SET_VISIT_TIME } from '../action-types';
 import { isToday } from '../../utils/utils';
 
 const initialState = null;
 
-export default function (
+export default (
   state: AdminDataVM = initialState,
-  action: PayloadAction<AdminData | VisitTimePaylod>
-): AdminDataVM {
+  action: PayloadAction<AdminData | VisitTimePaylod>,
+): AdminDataVM => {
   switch (action.type) {
     case SET_ADMIN_DATA: {
       const { username, sportObject, bookings } = action.payload as AdminData;
@@ -28,27 +28,25 @@ export default function (
         sportObject,
         todayBookings,
         pastBookings,
-      }
+      };
     }
 
     case SET_VISIT_TIME: {
       const { visitTime, booking } = action.payload as VisitTimePaylod;
-      const todayBookings = state.todayBookings.map((item: AdminBooking) => {
-        return item.id === booking.id
-          ? {
-            ...item,
-            visitTime,
-          }
-          : item;
-      });
+      const todayBookings = state.todayBookings.map((item: AdminBooking) => (item.id === booking.id
+        ? {
+          ...item,
+          visitTime,
+        }
+        : item));
 
       return {
         ...state,
         todayBookings,
       };
     }
- 
+
     default:
       return state;
   }
-}
+};

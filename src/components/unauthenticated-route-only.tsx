@@ -14,7 +14,7 @@ export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRo
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async function () {
+    (async () => {
       const response = await getAdminData();
       setAuthenticated(response.success);
       setLoading(false);
@@ -22,7 +22,7 @@ export default function UnauthenticatedRouteOnly({ children }: UnauthenticatedRo
   }, []);
 
   if (loading) {
-    return <SplashScreen />
+    return <SplashScreen />;
   }
 
   if (authenticated) {

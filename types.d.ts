@@ -60,7 +60,7 @@ type AdminDataVM = {
   sportObject: SportObjectVM,
   todayBookings: AdminBooking[],
   pastBookings: AdminBooking[],
-}
+};
 
 type ReduxState = {
   adminData: AdminDataVM,
@@ -70,4 +70,25 @@ type ReduxState = {
 type VisitTimePaylod = {
   visitTime: string,
   booking: AdminBooking,
+};
+
+// ************** React Components ****************
+
+type ToastProps = {
+  snackbarOpen: boolean,
+  closeSnackbar: () => void,
+  errors: string[],
+};
+
+type ConfirmVisitDialogProps = {
+  loading: boolean,
+  dialogOpen: boolean,
+  closeDialog: () => void,
+  booking: AdminBooking,
+  confirmVisitRequest: (event: React.MouseEvent<HTMLElement>) => Promise<void>,
+};
+
+type LoadingButtonProps = {
+  children: React.ReactNode,
+  loading: boolean,
 };

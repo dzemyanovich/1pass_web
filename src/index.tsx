@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { Outlet, BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -12,13 +12,12 @@ import SignIn from './pages/sign-in';
 import TodayBookings from './pages/today-bookings';
 import UnauthenticatedRouteOnly from './components/unauthenticated-route-only';
 import ProtectedRoute from './components/protected-route';
-import store from './redux/store'
+import store from './redux/store';
 import BookingsWrapper from './pages/bookings-wrapper';
 import PastBookings from './pages/past-bookings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// todo: use linting
 root.render(
   <Provider store={store}>
     <BrowserRouter>

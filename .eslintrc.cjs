@@ -41,16 +41,25 @@ module.exports = {
         },
       },
     ],
-    'max-len': [ 'error', { code: 120 }],
+    'max-len': ['error', { code: 120 }],
     'object-curly-newline': 'off',
     'import/prefer-default-export': 'off',
     'arrow-parens': 'off',
     'jsx-a11y/no-autofocus': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/default-param-last': 'off',
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false,
+      },
+    ],
+    'react/jsx-one-expression-per-line': 'off',
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-  ignorePatterns: ['*.test.ts', '*.test.tsx'],
+  ignorePatterns: ['*.test.ts', '*.test.tsx', '*.js'],
 };

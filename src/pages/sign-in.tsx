@@ -26,7 +26,7 @@ export default function SignIn() {
     return !isEmptyString(username) && !isEmptyString(password);
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     setSubmitted(true);
     event.preventDefault();
     if (loading || !formValid()) {
@@ -102,7 +102,10 @@ export default function SignIn() {
           </LoadingButton>
           {!!erorrs.length && (
             <Alert severity="error">
-              {erorrs.map((error: string, index: number) => <div key={`server-error-${index}`}>{error}</div>)}
+              {erorrs.map((
+                error: string,
+                index: number,
+              ) => <div key={`server-error-${index.toString()}`}>{error}</div>)}
             </Alert>
           )}
         </Box>

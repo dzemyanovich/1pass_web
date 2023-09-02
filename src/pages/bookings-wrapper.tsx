@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -74,7 +74,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft({ children }) {
+export default function PersistentDrawerLeft({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();

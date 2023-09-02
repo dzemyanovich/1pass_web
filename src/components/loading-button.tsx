@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function LoadingButton({ children, loading }) {
+export default function LoadingButton({ children, loading }: LoadingButtonProps) {
   return (
     <Box sx={{ position: 'relative' }}>
       {children}
@@ -20,5 +20,5 @@ export default function LoadingButton({ children, loading }) {
         />
       )}
     </Box>
-  )
+  );
 }

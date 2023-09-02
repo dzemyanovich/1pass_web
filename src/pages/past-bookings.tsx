@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -14,7 +14,7 @@ export default function PastBookings() {
   const bookings: AdminBooking[] = useSelector((state: ReduxState) => state.adminData.pastBookings);
 
   return (
-    <React.Fragment>
+    <>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Past Bookings
       </Typography>
@@ -35,18 +35,18 @@ export default function PastBookings() {
               <TableCell colSpan={6}>No bookings found</TableCell>
             </TableRow>
           )}
-          {bookings.map((booking: AdminBooking) => (
-            <TableRow key={booking.id}>
-              <TableCell>{booking.user.firstName}</TableCell>
-              <TableCell>{booking.user.lastName}</TableCell>
-              <TableCell>{booking.user.phone}</TableCell>
-              <TableCell>{booking.user.email}</TableCell>
-              <TableCell>{formatDate(booking.bookingTime)}</TableCell>
-              <TableCell>{formatDate(booking.visitTime)}</TableCell>
+          {bookings.map((adminBooking: AdminBooking) => (
+            <TableRow key={adminBooking.id}>
+              <TableCell>{adminBooking.user.firstName}</TableCell>
+              <TableCell>{adminBooking.user.lastName}</TableCell>
+              <TableCell>{adminBooking.user.phone}</TableCell>
+              <TableCell>{adminBooking.user.email}</TableCell>
+              <TableCell>{formatDate(adminBooking.bookingTime)}</TableCell>
+              <TableCell>{formatDate(adminBooking.visitTime)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </React.Fragment>
+    </>
   );
 }

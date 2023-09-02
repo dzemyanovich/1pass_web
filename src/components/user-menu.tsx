@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import { removeAuthToken } from '../utils/local-storage-manager';
-import Box from '@mui/material/Box';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -23,14 +23,14 @@ export default function UserMenu() {
 
   const signOut = () => {
     removeAuthToken();
-    location.reload();
-  }
+    window.location.reload();
+  };
 
   return (
     <div>
       <Button color="inherit" size="large" onClick={handleMenu}>
         <Box sx={{ m: 1, display: 'flex' }}>
-          <AccountCircle  sx={{ mr: 1 }}/>
+          <AccountCircle sx={{ mr: 1 }} />
           {username}
         </Box>
       </Button>
