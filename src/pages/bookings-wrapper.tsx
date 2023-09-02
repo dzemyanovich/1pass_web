@@ -78,7 +78,7 @@ export default function PersistentDrawerLeft({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { sportObject }: AdminData = useSelector((state: ReduxState) => state.adminData);
+  const sportObject: SportObjectVM = useSelector((state: ReduxState) => state.adminData.sportObject);
 
   const handleDrawerOpen = () => {
     setOpen(true);

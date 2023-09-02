@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children }: ProtectedRoute): JSX.Elemen
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const adminData: AdminData = useSelector((state: ReduxState) => state.adminData);
+  const adminData: AdminDataVM = useSelector((state: ReduxState) => state.adminData);
 
   useEffect(() => {
     (async function () {

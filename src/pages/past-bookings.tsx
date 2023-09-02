@@ -9,13 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import { formatDate } from '../utils/format';
-import { isToday } from '../utils/utils';
 
 export default function PastBookings() {
-  const bookings: AdminBooking[] = useSelector((state: ReduxState) => state
-    .adminData
-    .bookings
-    .filter((booking: AdminBooking) => !isToday(booking.bookingTime)));
+  const bookings: AdminBooking[] = useSelector((state: ReduxState) => state.adminData.pastBookings);
 
   return (
     <React.Fragment>

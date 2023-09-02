@@ -55,8 +55,15 @@ type AdminData = {
   bookings: AdminBooking[],
 };
 
+type AdminDataVM = {
+  username: string,
+  sportObject: SportObjectVM,
+  todayBookings: AdminBooking[],
+  pastBookings: AdminBooking[],
+}
+
 type ReduxState = {
-  adminData: AdminData,
+  adminData: AdminDataVM,
   loading: boolean,
 };
 
