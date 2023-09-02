@@ -1,3 +1,11 @@
+# Envs
+
+| Env      | URL                                                                         |
+| -------- | --------------------------------------------------------------------------- |
+| dev      | http://dev1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/      |
+| preprod  | http://preprod1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/  |
+| prod     | http://prod1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/     |
+
 # Prerequisites
 - Node.js 16.20.1
 - Terragrunt 0.48.1 (Terraform 1.5.2 is used under the hood). Use `brew` to install
@@ -6,6 +14,14 @@
 Error: Invalid provider registry host
 The host "registry.terraform.io" given in provider source address "registry.terraform.io/hashicorp/aws" does not offer a Terraform provider registry.
 ```
+
+# GitLab CI/CD setup
+Before running pipeline set the following env vars (variables should be **not protected**):
+
+| Env var                      | Value                | Comments                                              |
+| ---------------------------- | -------------------- | ----------------------------------------------------- |
+| AWS_ACCESS_KEY_ID            | "some_value"         |                                                       |
+| AWS_SECRET_ACCESS_KEY        | "some_value"         |                                                       |
 
 # Local setup
 
