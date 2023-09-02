@@ -1,0 +1,101 @@
+image: node:16.20.1
+
+stages:
+  - build
+  - test
+  - plan
+  - apply
+
+variables:
+  TG_IMAGE: alpine/terragrunt:1.5.2
+
+cache:
+  paths:
+    - node_modules
+
+.build:
+  stage: build
+  before_script:
+    - yarn
+  artifacts:
+    paths:
+    - dist_preprod
+    - dist_prod
+
+build-preprod:
+  extends:
+    - .build
+  script:
+    - yarn build-preprod
+  only:
+    - develop
+
+build-prod:
+  extends:
+    - .build
+  script:
+    - yarn build-prod
+  only:
+    - master
+
+.test:
+  stage: test
+
+lint:
+  extends:
+    - .test
+  script:
+    - yarn lint
+
+.plan:
+  stage: plan
+  image:
+    name: $TG_IMAGE
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'  
+  script:
+    - terragrunt run-all plan --terragrunt-non-interactive
+  when: manual
+
+plan-preprod:
+  extends:
+    - .plan
+  before_script:
+    - cd terragrunt/live/preprod
+  only:
+    - develop
+
+plan-prod:
+  extends:
+    - .plan
+  before_script:
+    - cd terragrunt/live/prod
+  only:
+    - master
+
+.apply:
+  stage: apply
+  image:
+    name: $TG_IMAGE
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  script:
+    - terragrunt run-all apply --terragrunt-non-interactive
+
+apply-preprod:
+  extends:
+    - .apply
+  before_script:
+    - cd terragrunt/live/preprod
+  only:
+    - develop
+
+apply-prod:
+  extends:
+    - .apply
+  before_script:
+    - cd terragrunt/live/prod
+  only:
+    - master

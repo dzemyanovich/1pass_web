@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
@@ -42,7 +43,7 @@ module.exports = {
     }),
   ],
   performance: {
-    maxEntrypointSize: 358400, // 350 KiB
-    maxAssetSize: 358400, // 350 KiB
+    maxEntrypointSize: 614400, // 600 KiB (600 * 1024 = 614400)
+    maxAssetSize: 614400,
   },
 };

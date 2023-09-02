@@ -14,7 +14,10 @@
     "build-dev": "webpack --mode=production --config webpack.dev.js",
     "build-preprod": "webpack --mode=production --config webpack.preprod.js",
     "build-prod": "webpack --mode=production --config webpack.prod.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "tg-validate": "cd terragrunt/live/dev && terragrunt run-all validate",
+    "tg-plan": "cd terragrunt/live/dev && terragrunt run-all plan",
+    "tg-apply": "cd terragrunt/live/dev && terragrunt run-all apply --terragrunt-non-interactive"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
