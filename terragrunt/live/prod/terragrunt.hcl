@@ -19,6 +19,7 @@ EOF
 remote_state {
   backend = "s3"
   config = {
+    # in the next project value should be "${local.production_domain}.${local.env}-terragrunt"
     bucket = "${local.production_domain}-${local.env}-terragrunt"
     region = "${local.aws_region}"
     key    = "${path_relative_to_include()}/terraform.tfstate"
