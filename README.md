@@ -2,9 +2,9 @@
 
 | Env      | URL                                                                         |
 | -------- | --------------------------------------------------------------------------- |
-| dev      | http://dev1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/      |
-| preprod  | http://preprod1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/  |
-| prod     | http://prod1.admin.multipass.app.s3-website.eu-central-1.amazonaws.com/     |
+| dev      | http://admin.multipass.app.dev1.s3-website.eu-central-1.amazonaws.com/      |
+| preprod  | http://admin.multipass.app.preprod1.s3-website.eu-central-1.amazonaws.com/  |
+| prod     | http://admin.multipass.app.prod1.s3-website.eu-central-1.amazonaws.com/     |
 
 # Prerequisites
 - Node.js 16.20.1
