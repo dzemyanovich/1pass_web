@@ -1,8 +1,8 @@
 locals {
+  global_vars         = (read_terragrunt_config(find_in_parent_folders("global.hcl"))).locals
   env                 = "dev1"
-  aws_region          = "eu-central-1"
-  // todo: this is dublicate (the same for other envs)
-  website_bucket_name = "admin.multipass.app"
+  aws_region          = local.global_vars.aws_region
+  production_domain   = local.global_vars.production_domain
   src_path            = "${get_parent_terragrunt_dir()}/../../../dist_dev/"
 }
 
@@ -19,7 +19,7 @@ EOF
 remote_state {
   backend = "s3"
   config = {
-    bucket = "${local.env}.${local.website_bucket_name}-terragrunt"
+    bucket = "${local.production_domain}-${local.env}-terragrunt"
     region = "${local.aws_region}"
     key    = "${path_relative_to_include()}/terraform.tfstate"
   }
