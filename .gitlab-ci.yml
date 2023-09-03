@@ -112,7 +112,7 @@ plan-prod:
       - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
   script:
     - terragrunt run-all apply --terragrunt-non-interactive
-  when: manual
+  # when: manual
 
 apply-preprod:
   extends:
@@ -130,29 +130,30 @@ apply-prod:
   only:
     - master
 
-.destroy:
-  stage: destroy
-  image:
-    name: $TG_IMAGE
-    entrypoint:
-      - '/usr/bin/env'
-      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'  
-  script:
-    - terragrunt run-all destroy --terragrunt-non-interactive
-  when: manual
+# commented out for the safety needs
+# .destroy:
+#   stage: destroy
+#   image:
+#     name: $TG_IMAGE
+#     entrypoint:
+#       - '/usr/bin/env'
+#       - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'  
+#   script:
+#     - terragrunt run-all destroy --terragrunt-non-interactive
+#   when: manual
 
-destroy-preprod:
-  extends:
-    - .destroy
-  before_script:
-    - cd terragrunt/live/preprod
-  only:
-    - develop
+# destroy-preprod:
+#   extends:
+#     - .destroy
+#   before_script:
+#     - cd terragrunt/live/preprod
+#   only:
+#     - develop
 
-destroy-prod:
-  extends:
-    - .destroy
-  before_script:
-    - cd terragrunt/live/prod
-  only:
-    - master
+# destroy-prod:
+#   extends:
+#     - .destroy
+#   before_script:
+#     - cd terragrunt/live/prod
+#   only:
+#     - master
