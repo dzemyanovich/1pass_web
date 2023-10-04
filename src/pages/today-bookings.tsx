@@ -12,9 +12,10 @@ import TableRow from '@mui/material/TableRow';
 
 import ConfirmVisitDialog from '../components/confirm-visit-dialog';
 import Toast from '../components/toast';
+import { SET_VISIT_TIME } from '../redux/action-types';
 import { formatDate } from '../utils/format';
 import { confirmVisit } from '../utils/api';
-import { SET_VISIT_TIME } from '../redux/action-types';
+import { internalServerError } from '../utils/errors';
 
 export default function TodayBookings() {
   const [dialogOpen, setDiagloOpen] = useState(false);
@@ -49,7 +50,9 @@ export default function TodayBookings() {
     setLoading(true);
     const response = await confirmVisit(booking.id);
     setLoading(false);
-    if (response.success) {
+    if (!response.success) {
+      setErrors(response.errors || [internalServerError]);
+    } else {
       setErrors([]);
       dispatch({
         type: SET_VISIT_TIME,
@@ -58,8 +61,6 @@ export default function TodayBookings() {
           booking,
         },
       });
-    } else {
-      setErrors(response.errors);
     }
     setDiagloOpen(false);
     setSnackbarOpen(true);
