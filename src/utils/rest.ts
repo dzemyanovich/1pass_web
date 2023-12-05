@@ -21,6 +21,15 @@ export function get<T, Y>(url: string, data: T): Promise<Y> {
 
 async function request<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
+  if (!response.ok) {
+    // eslint-disable-next-line no-console
+    console.log('[errorMessage]', response.statusText);
+
+    return {
+      success: false,
+    } as T;
+  }
+
   const text = await response.text();
   const data = text && JSON.parse(text);
   if (data.errorMessage) {
